@@ -40,6 +40,10 @@ describe "String" do
     "@%%@+_)(*&^%$@!".tagify.should eq ""
   end
 
+  it "@\#@\#\$@# 22353 family Cádiz" do
+    "@\#@\#\$@# 22353 family Cádiz".tagify.should eq "22353-FAMILY-CADIZ"
+  end
+
   context "with a bang" do
     it "changes the value of the string" do
       s = "a,b".tagify!
