@@ -1,6 +1,6 @@
 # TagifyString
 
-TODO: Write a gem description
+This gem is a fancy wrapper for string#parameterize from Active support.  It is written so that a number of projects that I work on can consistently operate on strings the way that is needed so that global changes can be simple.  As the functionality may grow a lot (in a backward-compatible way), it's best to examine lib/tagify_string/core_ext.rb.  At present this adds 'tagify(options={})' and 'tagify!(options={})' to the standard Ruby string.
 
 ## Installation
 
