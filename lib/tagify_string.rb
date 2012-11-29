@@ -1,5 +1,5 @@
 require "tagify_string/version"
-require File.expand_path("lib/tagify_string/lib/core_ext")
+require "tagify_string/core_ext"
 
 module TagifyString
 end
