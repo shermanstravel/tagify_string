@@ -36,16 +36,6 @@ describe "String" do
     " +a-  .,.,, . &&()@,  ##b .  . c#-d    ".tagify.should eq "A-B-C-D"
   end
 
-  context "up case and down case" do
-    it "defaults to upcase" do
-      "a".tagify.should eq "A"
-    end
-
-    it "recognizes downcase option" do
-      "A".tagify(:upcase => false).should eq "a"
-    end
-  end
-
   context "with a bang" do
     it "changes the value of the string" do
       s = "a,b".tagify!
@@ -55,6 +45,50 @@ describe "String" do
     it "changes the value of the string with options" do
       s = "a,b".tagify!(:upcase => false)
       s.should eq "a-b"
+    end
+  end
+
+  context "options" do
+    context "up case and down case" do
+      it "defaults to upcase" do
+        "a".tagify.should eq "A"
+      end
+
+      it "recognizes downcase option" do
+        "A".tagify(:upcase => false).should eq "a"
+      end
+    end
+
+    it "uses indicated separator character" do
+      "a b".tagify(:sep => "+").should eq "A+B"
+    end
+
+    context "indicated prefix" do
+      it "uses indicated prefix" do
+        "a b".tagify(:prefix => "ho-ho-ho").should eq "HO-HO-HO-A-B"
+      end
+
+      it "uses indicated prefix and smashes other prefixes" do
+        "a b".tagify(:prefix => "ho-ho-ho", :gtto => true).should eq "HO-HO-HO-A-B"
+      end
+    end
+
+    context "gt tag" do
+      it "puts a t tag if indicated" do
+        "Cleveland".tagify(:t => true).should eq "T-CLEVELAND"
+      end
+
+      it "puts a gtto tag if indicated" do
+        "Cleveland".tagify(:gtto => true).should eq "GTTO-CLEVELAND"
+      end
+
+      it "puts a gtfrom tag if indicated" do
+        "Cleveland".tagify(:gtfrom => true).should eq "GTFROM-CLEVELAND"
+      end
+
+      it "puts a gt tag with proper case if indicated" do
+        "Cleveland".tagify(:gtfrom => true, :upcase => false).should eq "gtfrom-cleveland"
+      end
     end
   end
 end
