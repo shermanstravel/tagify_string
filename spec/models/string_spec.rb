@@ -36,6 +36,10 @@ describe "String" do
     " +a-  .,.,, . &&()@,  ##b .  . c#-d    ".tagify.should eq "A-B-C-D"
   end
 
+  it "returns an empty string if all garbage is presented" do
+    "@%%@+_)(*&^%$@!".tagify.should eq ""
+  end
+
   context "with a bang" do
     it "changes the value of the string" do
       s = "a,b".tagify!

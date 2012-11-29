@@ -25,6 +25,11 @@ String.class_eval do
       end
     end
 
+    # The Sonia Clause.  Check for all garbage characters.  Return an empty string in this case.
+    output = self.gsub("_", "").parameterize(opts[:sep])
+    return "" if output.length == 0
+
+    # Otherwise, attach prefix, process for case and send back.
     output = [prefix, self].join(" ").parameterize(opts[:sep])
     opts[:upcase] ? output.upcase : output.downcase
   end
