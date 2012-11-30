@@ -18,7 +18,17 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+    $ "a b".tagify
+
+or, to change the string
+
+    $ "a b".tagify!
+
+Both versions of tagify take an options param:
+
+    $ "a b".tagify(:sep => "+", :upcase => false)
+
+..will give you "a+b".  Refer to lib/tagify_string/core_ext.rb for all of the options.
 
 ## Contributing
 
