@@ -37,4 +37,14 @@ String.class_eval do
   def tagify!(options = {})
     replace self.tagify(options)
   end
+
+  def taggify(options = {})
+    default_options = {:upcase => false, :sep => "-"}
+    opts = default_options.merge(options)
+    tagify(opts)
+  end
+
+  def taggify!(options = {})
+    replace self.taggify(options)
+  end
 end
