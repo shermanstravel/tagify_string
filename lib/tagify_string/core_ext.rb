@@ -26,15 +26,26 @@ String.class_eval do
     end
 
     # The Sonia Clause.  Check for all garbage characters.  Return an empty string in this case.
-    output = self.gsub("_", " ").parameterize(opts[:sep])
+    output = self.gsub("_", " ").gsub("'", "").parameterize(opts[:sep])
     return "" if output.length == 0
 
     # Otherwise, attach prefix, process for case and send back.
-    output = [prefix, self].join(" ").parameterize(opts[:sep])
+    output = [prefix, output].join(" ").parameterize(opts[:sep]) if prefix.present?
+
     opts[:upcase] ? output.upcase : output.downcase
   end
 
   def tagify!(options = {})
     replace self.tagify(options)
+  end
+
+  def taggify(options = {})
+    default_options = {:upcase => false, :sep => "-"}
+    opts = default_options.merge(options)
+    tagify(opts)
+  end
+
+  def taggify!(options = {})
+    replace self.taggify(options)
   end
 end
