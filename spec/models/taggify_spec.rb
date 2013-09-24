@@ -12,8 +12,19 @@ describe "String" do
     ",a,B,".taggify.should eq "a-b"
   end
 
+  it "removed quotes" do
+    "Martha's Vineyard".taggify.should eq('marthas-vineyard')
+  end
+
+  it "switches punctuated chars for unpunctuated" do
+    "São Paulo".taggify.should eq('sao-paulo')
+    "Cancún".taggify.should eq('cancun')
+  end
+
   it "removes dots" do
     ".a.B.".taggify.should eq "a-b"
+    ".a...B.".taggify.should eq "a-b"
+    ".a. B.".taggify.should eq "a-b"
   end
 
   it "replaces spaces with dashes" do
