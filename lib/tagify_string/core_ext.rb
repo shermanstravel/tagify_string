@@ -26,8 +26,6 @@ String.class_eval do
     end
 
     # The Sonia Clause.  Check for all garbage characters.  Return an empty string in this case.
-    output = ""
-
     if Rails::VERSION::MAJOR >= 5
       output = self.gsub("_", " ").gsub("'", "").parameterize(separator: opts[:sep])
     else
@@ -37,12 +35,14 @@ String.class_eval do
     return "" if output.length == 0
 
     # Otherwise, attach prefix, process for case and send back.
-    if Rails::VERSION::MAJOR >= 5
-      output = [prefix, output].join(" ").parameterize(separator: opts[:sep]) if prefix.present?  
-    else
-      output = [prefix, output].join(" ").parameterize(opts[:sep]) if prefix.present?
+    if prefix.present?
+      if Rails::VERSION::MAJOR >= 5
+        output = [prefix, output].join(" ").parameterize(separator: opts[:sep]) if prefix.present?  
+      else
+        output = [prefix, output].join(" ").parameterize(opts[:sep]) if prefix.present?
+      end
     end
-
+    
     opts[:upcase] ? output.upcase : output.downcase
   end
 
